@@ -11,18 +11,22 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget? activeScreen;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    activeScreen = StartScreen(switchScreen);
-    super.initState();
-  }
+  // To get rid of initState, terinary expression can be used.
+  String activeScreen = 'start';
+
+  // Widget? activeScreen;
+
+  // @override
+  // void initState() {
+  //   activeScreen = StartScreen(switchScreen);
+  //   super.initState();
+  // }
 
   void switchScreen() {
     setState(() {
-      activeScreen = const QuestionsScreen();
+      // activeScreen = const QuestionsScreen();
+      activeScreen = 'question';
     });
   }
 
@@ -43,7 +47,7 @@ class _QuizState extends State<Quiz> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: activeScreen,
+          child: activeScreen == 'start' ? StartScreen(switchScreen) : const QuestionsScreen(),
         ),
       ),
     );
