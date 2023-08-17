@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/models/quiz_question.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import 'models/quiz_question.dart';
 import 'answer_button.dart';
 
 class QuestionsScreen extends StatefulWidget {
@@ -15,9 +16,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
 
   void answerQuestion() {
-    setState(() {
-      questionIndex++;
-    });
+
+    setState(() => questionIndex++);
+
     if (questionIndex == questions.length - 1) {
       questionIndex = 0;
     }
