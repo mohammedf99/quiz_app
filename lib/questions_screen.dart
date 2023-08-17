@@ -37,7 +37,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         children: [
           Text(
             currentQuestion.question,
-            style: const TextStyle(fontSize: 26, color: Colors.white),
+            style: GoogleFonts.lato(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(
