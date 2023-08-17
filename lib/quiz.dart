@@ -11,7 +11,6 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-
   // To get rid of initState, terinary expression can be used.
   String activeScreen = 'start';
 
@@ -47,7 +46,9 @@ class _QuizState extends State<Quiz> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: activeScreen == 'start' ? StartScreen(switchScreen) : const QuestionsScreen(),
+          child: activeScreen == 'start'
+              ? StartScreen(switchScreen)
+              : const QuestionsScreen(),
         ),
       ),
     );
