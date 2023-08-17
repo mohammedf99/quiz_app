@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/models/quiz_question.dart';
+
+import 'answer_button.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -8,8 +11,44 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
+  var questionIndex = 0;
+
+
+  void answerQuestion() {
+    setState(() {
+      questionIndex++;
+    });
+    if (questionIndex == questions.length - 1) {
+      questionIndex = 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("questions screen"));
+    
+    final currentQuestion = questions[questionIndex];
+
+    return Container(
+      margin: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            currentQuestion.question,
+            style: const TextStyle(fontSize: 26, color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          ...currentQuestion.getShuffledAnswers().map(
+            (answer) {
+              return AnswerButton(answer: answer, onTap: answerQuestion);
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
