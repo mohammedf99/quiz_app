@@ -3,6 +3,7 @@ import 'package:quiz_app/models/quiz_question.dart';
 
 import 'questions_screen.dart';
 import 'start_screen.dart';
+import 'results_screen.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -38,13 +39,22 @@ class _QuizState extends State<Quiz> {
     if (selectedAnswer.length == questions.length) {
       setState(() {
         selectedAnswer.clear();
-        activeScreen = 'start';
+        activeScreen = 'results';
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
+    Widget screenWidget = StartScreen(switchScreen);
+
+    if (activeScreen == 'question') {
+      screenWidget = QuestionsScreen(chooseAnswer);
+    } else if (activeScreen == 'results') {
+      screenWidget = const ResultsScreen();
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -60,9 +70,7 @@ class _QuizState extends State<Quiz> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: activeScreen == 'start'
-              ? StartScreen(switchScreen)
-              : QuestionsScreen(chooseAnswer),
+          child: screenWidget,
         ),
       ),
     );
