@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/models/quiz_question.dart';
 
 import 'questions_screen.dart';
 import 'start_screen.dart';
@@ -12,6 +13,7 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   // To get rid of initState, terinary expression can be used.
+  final List<String> selectedAnswer = [];
   String activeScreen = 'start';
 
   // Widget? activeScreen;
@@ -27,6 +29,18 @@ class _QuizState extends State<Quiz> {
       // activeScreen = const QuestionsScreen();
       activeScreen = 'question';
     });
+  }
+
+  void chooseAnswer(String answer) {
+    
+    selectedAnswer.add(answer);
+
+    if (selectedAnswer.length == questions.length) {
+      setState(() {
+        selectedAnswer.clear();
+        activeScreen = 'start';
+      });
+    }
   }
 
   @override
@@ -48,7 +62,7 @@ class _QuizState extends State<Quiz> {
           ),
           child: activeScreen == 'start'
               ? StartScreen(switchScreen)
-              : const QuestionsScreen(),
+              : QuestionsScreen(chooseAnswer),
         ),
       ),
     );
