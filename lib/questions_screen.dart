@@ -27,7 +27,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   @override
   Widget build(BuildContext context) {
-   
     final currentQuestion = questions[questionIndex];
 
     return Container(
