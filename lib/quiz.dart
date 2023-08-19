@@ -33,26 +33,33 @@ class _QuizState extends State<Quiz> {
   }
 
   void chooseAnswer(String answer) {
-    
     selectedAnswer.add(answer);
 
     if (selectedAnswer.length == questions.length) {
       setState(() {
-        selectedAnswer.clear();
         activeScreen = 'results';
       });
     }
   }
 
+  void restartQuiz() {
+    setState(() {
+      activeScreen = 'start';
+      selectedAnswer.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
     Widget screenWidget = StartScreen(switchScreen);
 
     if (activeScreen == 'question') {
       screenWidget = QuestionsScreen(chooseAnswer);
     } else if (activeScreen == 'results') {
-      screenWidget = ResultsScreen(selectedAnswer);
+      screenWidget = ResultsScreen(
+        selectedAnswers: selectedAnswer,
+        onTap: restartQuiz,
+      );
     }
 
     return MaterialApp(
