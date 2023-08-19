@@ -4,8 +4,9 @@ import 'models/quiz_question.dart';
 import 'questions_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key, required this.selectedAnswers, required this.onTap});
- 
+  const ResultsScreen(
+      {super.key, required this.selectedAnswers, required this.onTap});
+
   final List<String> selectedAnswers;
   final void Function() onTap;
 
@@ -24,12 +25,11 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final summaryData = getSummaryData();
     final int totalQuestions = questions.length;
-    final int totalCorrectAnswers = summaryData.where((data) {
-      return data['correct_answer'] == data['selected_answer'];
-    }).length;
+    final int totalCorrectAnswers = summaryData
+        .where((data) => data['correct_answer'] == data['selected_answer'])
+        .length;
 
     return Container(
       width: double.infinity,
